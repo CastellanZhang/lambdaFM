@@ -1,7 +1,7 @@
 # lambdaFM
 ## 前言：
 * lambdaFM是lambdaRank和FM(Factorization Machines)的结合，用于解决排序问题。实现了pairwise和lambdaRank两种训练方法，可通过-rank参数选择。
-lambdaFM是在[alphaFM](https://github.com/CastellanZhang/alphaFM)的代码基础上修改而成，同样是单机多线程版本，同样是FTR优化算法。<br>
+lambdaFM是在[alphaFM](https://github.com/CastellanZhang/alphaFM)的代码基础上修改而成，同样是单机多线程版本，同样是FTRL优化算法。<br>
 
 * 算法原理见我的博客文章：http://castellanzhang.github.io/2017/07/16/lambdafm/
 
