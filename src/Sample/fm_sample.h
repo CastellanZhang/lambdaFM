@@ -1,0 +1,79 @@
+#ifndef FM_SAMPLE_H_
+#define FM_SAMPLE_H_
+
+#include <string>
+#include <unordered_map>
+
+using namespace std;
+
+const string spliter = " ";
+const string innerSpliter = ":";
+const char commentTag = '#';
+
+class fm_sample
+{
+public:
+    int y;
+    string qid;
+    unordered_map<string, double> x;
+
+public:
+    fm_sample(const string& line)
+    {
+        this->x.clear();
+        size_t posb = line.find_first_not_of(spliter, 0);
+        size_t pose = line.find_first_of(spliter, posb);
+        int label = atoi(line.substr(posb, pose-posb).c_str());
+        if(label < 0)
+        {
+            cout << "wrong line input, label can not be less than 0\n" << line << endl;
+            throw "wrong line input";
+        }
+        this->y = label;
+        posb = line.find_first_not_of(spliter, pose);
+        pose = line.find_first_of(spliter, posb);
+        this->qid = line.substr(posb, pose-posb);
+        string key;
+        double value;
+        while(pose < line.size())
+        {
+            posb = line.find_first_not_of(spliter, pose);
+            if(posb == string::npos)
+            {
+                break;
+            }
+            if(commentTag == line[posb])
+            {
+                break;
+            }
+            pose = line.find_first_of(innerSpliter, posb);
+            if(pose == string::npos)
+            {
+                cout << "wrong line input\n" << line << endl;
+                throw "wrong line input";
+            }
+            key = line.substr(posb, pose-posb);
+            posb = pose + 1;
+            if(posb >= line.size())
+            {
+                cout << "wrong line input\n" << line << endl;
+                throw "wrong line input";
+            }
+            pose = line.find_first_of(spliter, posb);
+            value = stod(line.substr(posb, pose-posb));
+            if(value != 0)
+            {
+                if(this->x.find(key) == this->x.end())
+                {
+                    this->x[key] = value;
+                }
+                else
+                {
+                    this->x[key] += value;
+                }
+            }
+        }
+    }
+};
+
+#endif /*FM_SAMPLE_H_*/
