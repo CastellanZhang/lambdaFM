@@ -58,4 +58,6 @@ lambdaFM是在[alphaFM](https://github.com/CastellanZhang/alphaFM)的代码基�
 -core \<threads_num\>: 计算线程数。	default:1<br>
 -out \<predict_path\>: 输出文件路径。<br>
 
+## 评测工具：
+* 写了一个python版本的NDCG@k计算工具，具体见：https://github.com/CastellanZhang/NDCG<br>
 
